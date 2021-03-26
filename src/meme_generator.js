@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import data from './memes_avaliable.json'
-import axios from 'axios';
 
 
 const option = data
