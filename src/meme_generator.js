@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import data from './memes_avaliable.json'
+import axios from 'axios'
 
 
 const option = data
@@ -10,8 +11,10 @@ export class MemeGenerator extends Component{
         this.state = {
             selectValue:option[0].value,
             topValue:'',
-            bottomValue:''
+            bottomValue:'',
+            quote:''
         }
+        this.getQuote()
 
     }
     createSelectList = () =>{
@@ -43,10 +46,19 @@ export class MemeGenerator extends Component{
     createSplitText = (str) => {
         return str.split(' ').join("+")
     }
+    getQuote = () =>{
+        axios.get('https://api.adviceslip.com/advice')
+        .then(response => this.setState({ quote: response.data.slip.advice }));
+        console.log(this.state)
+    }
 
 
 render(){
     return(
+        <div>
+        <p id='quotes'>
+            {this.state.quote}
+        </p>
         <form>
             <p lassName="h5 text-center mb-4">Enter Top value:-</p>
             <input type='text' value={this.state.topValue} onChange={this.handleTopValueChange} required/>
@@ -59,8 +71,9 @@ render(){
                     {this.createSelectList()}
                 </select>
             <p>Click To Generate Meme:</p>
-            <button class='Button1' type='button' onClick={this.handleClick}>Generate</button>
+            <button class='Button1' type='button' onClick={this.getQuote}>Generate</button>
         </form>
+        </div>
 
     )
 }
