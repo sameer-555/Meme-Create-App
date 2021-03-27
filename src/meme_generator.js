@@ -12,7 +12,8 @@ export class MemeGenerator extends Component{
             selectValue:option[0].value,
             topValue:'',
             bottomValue:'',
-            quote:''
+            quote:'',
+            sourceURL:'http://apimeme.com/meme?meme=Aaaaand-Its-Gone&top=&bottom='
         }
         this.getQuote()
 
@@ -27,17 +28,23 @@ export class MemeGenerator extends Component{
 
     handleTopValueChange = (event) =>{
         this.setState({topValue :event.target.value})
+        let url = `http://apimeme.com/meme?meme=${this.state.selectValue}&top=${this.createSplitText(event.target.value)}&bottom=${this.createSplitText(this.state.bottomValue)}`
+        this.handleSourceURL(url)
     }
 
     handleBottomValueChange = (event) =>{
         this.setState({bottomValue:event.target.value})
+        let url = `http://apimeme.com/meme?meme=${this.state.selectValue}&top=${this.createSplitText(this.state.topValue)}&bottom=${this.createSplitText(event.target.value)}`
+        this.handleSourceURL(url)
     }
 
     handleSelectChange =(event) =>{
         this.setState({selectValue:event.target.value})
+        let url = `http://apimeme.com/meme?meme=${event.target.value}&top=${this.createSplitText(this.state.topValue)}&bottom=${this.createSplitText(this.state.bottomValue)}`
+        this.handleSourceURL(url)
     }
 
-    handleClick = (event) => {
+    handleClick = () => {
         let requestURL = `http://apimeme.com/meme?meme=${this.state.selectValue}&top=${this.createSplitText(this.state.topValue)}&bottom=${this.createSplitText(this.state.bottomValue)}`
         window.open(requestURL)
 
@@ -49,8 +56,12 @@ export class MemeGenerator extends Component{
     getQuote = () =>{
         axios.get('https://api.adviceslip.com/advice')
         .then(response => this.setState({ quote: response.data.slip.advice }));
-        console.log(this.state)
     }
+
+    handleSourceURL = (url) =>{
+        this.setState({sourceURL: url})
+    }
+
 
 
 render(){
@@ -73,6 +84,7 @@ render(){
             <p>Click To Generate Meme:</p>
             <button class='Button1' type='button' onClick={this.handleClick}>Generate</button>
         </form>
+        <img src={this.state.sourceURL} onChange={this.handleSourceURL} width='360' height='202'></img>
         </div>
 
     )
