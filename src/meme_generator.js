@@ -81,7 +81,7 @@ render(){
                 <select class='select-thing'  value={this.state.selectValue} onChange={this.handleSelectChange} required>
                     {this.createSelectList()}
                 </select>
-            <p>Click To Generate Meme:</p>
+            
             <button class='Button1' type='button' onClick={this.handleClick}>Generate</button>
         </form>
         <img alt={this.state.selectValue} src={this.state.sourceURL} onChange={this.handleSourceURL} width='360' height='202'></img>
