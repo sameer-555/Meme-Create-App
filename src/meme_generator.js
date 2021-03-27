@@ -84,7 +84,7 @@ render(){
             <p>Click To Generate Meme:</p>
             <button class='Button1' type='button' onClick={this.handleClick}>Generate</button>
         </form>
-        <img src={this.state.sourceURL} onChange={this.handleSourceURL} width='360' height='202'></img>
+        <img alt={this.state.selectValue} src={this.state.sourceURL} onChange={this.handleSourceURL} width='360' height='202'></img>
         </div>
 
     )
