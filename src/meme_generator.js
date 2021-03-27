@@ -71,7 +71,7 @@ render(){
                     {this.createSelectList()}
                 </select>
             <p>Click To Generate Meme:</p>
-            <button class='Button1' type='button' onClick={this.getQuote}>Generate</button>
+            <button class='Button1' type='button' onClick={this.handleClick}>Generate</button>
         </form>
         </div>
 
