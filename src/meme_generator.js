@@ -48,19 +48,20 @@ export class MemeGenerator extends Component{
 render(){
     return(
         <form>
-            <p>Enter Top value:-</p>
+            <p lassName="h5 text-center mb-4">Enter Top value:-</p>
             <input type='text' value={this.state.topValue} onChange={this.handleTopValueChange} required/>
             <p>Enter Bottom value:-</p>
             <input type='text' value={this.state.bottomValue} onChange={this.handleBottomValueChange} required/>
             <p>
             Pick your Meme Image(more will be added):-
             </p>
-            <select value={this.state.selectValue} onChange={this.handleSelectChange} required>
-                {this.createSelectList()}
-            </select>
+                <select class='select-thing'  value={this.state.selectValue} onChange={this.handleSelectChange} required>
+                    {this.createSelectList()}
+                </select>
             <p>Click To Generate Meme:</p>
-            <button type='button' onClick={this.handleClick}>Generate</button>
+            <button class='Button1' type='button' onClick={this.handleClick}>Generate</button>
         </form>
+
     )
 }
 }

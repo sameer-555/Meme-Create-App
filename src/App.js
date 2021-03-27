@@ -3,7 +3,7 @@ import MemeGenerator from './meme_generator'
 
 function App() {
   return (
-    <MemeGenerator/>
+      <MemeGenerator/>
   );
 }
 
