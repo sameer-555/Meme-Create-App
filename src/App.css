@@ -119,10 +119,11 @@ input:-webkit-autofill:focus {
 }
 
 #quotes{
-  color: palegreen;
-  background-color: darkcyan;
+  color: greenyellow;
+  background-color: darkkhaki;
   padding: 5px;
   margin: 10px;
+  margin-left: 0px;
 }
 
 @keyframes App-logo-spin {
