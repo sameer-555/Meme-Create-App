@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import axios from 'axios'
-import { render } from 'react-dom';
 
 const activity_type = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
 const participants = [1,2,3,4,5,6,7,8,9,10]
@@ -38,7 +37,7 @@ export class ActivityForBoredPeople extends Component{
         let options = [];
         if(this.state.link !== "" && this.state.you_can !== '?'){
             options.push(<p class ='field_padding'><b>Below link might help:</b></p>)
-            options.push(<a href={this.state.link} target="_blank" >{this.state.you_can}</a>)
+            options.push(<a href={this.state.link} target="_blank" rel="noopener noreferrer">{this.state.you_can}</a>)
         }
         
         return options
