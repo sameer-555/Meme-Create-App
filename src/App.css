@@ -36,10 +36,26 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
+.activity {
+   padding: 10px 5px 5px 5px;
+}
 @import url("https://fonts.googleapis.com/css?family=Fjalla+One&display=swap");
 * {
   margin: 0;
   padding: 0;
+}
+
+/* Container for skill bars */
+.activity_container {
+  width: 100%; /* Full width */
+  text-align: center; /* Right-align text */
+  padding-top: 10px; /* Add top padding */
+  padding-bottom: 10px; 
+  background-color: rgb(6, 190, 0); /* Grey background */
+}
+
+.field_padding {
+  padding: 5px 5px 5px 5px;
 }
 
 body {

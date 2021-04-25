@@ -67,7 +67,7 @@ export class MemeGenerator extends Component{
 render(){
     return(
         <div>
-        <p id='quotes'>
+        <p id='quotes' >
             {this.state.quote}
         </p>
         <form>
