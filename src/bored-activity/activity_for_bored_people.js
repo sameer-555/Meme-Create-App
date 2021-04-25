@@ -54,7 +54,7 @@ export class ActivityForBoredPeople extends Component{
 
     handleCreateActivity =(event) =>{
         let url = "http://www.boredapi.com/api/activity/"
-        url = url + `?type=${this.state.selectActivity}` + `&participants=${this.state.participants}`
+        url = url + `?type=${this.state.selectActivity}&participants=${this.state.participants}`
         axios.get(url)
         .then((response) => {
                 this.setState({you_can:response.data.activity});
