@@ -13,6 +13,7 @@ export class ActivityForBoredPeople extends Component{
             you_can : "?",
             chances: 0,
             link: "",
+            loading:false
         }
 
 
@@ -33,6 +34,19 @@ export class ActivityForBoredPeople extends Component{
         return options;
     }
 
+    loadingScreen = () =>{
+        let loader = [];
+        if (this.state.loading){
+            loader.push(<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>)
+        }
+        else{
+            loader.pop()
+            console.log("0000",loader)
+        }
+        return loader
+    }
+
+    
     linkIfAny = () =>{
         let options = [];
         if(this.state.link !== "" && this.state.you_can !== '?'){
@@ -53,20 +67,24 @@ export class ActivityForBoredPeople extends Component{
 
 
     handleCreateActivity =(event) =>{
+        this.setState({loading:true})
         let url = "http://www.boredapi.com/api/activity/"
         url = url + `?type=${this.state.selectActivity}&participants=${this.state.participants}`
         axios.get(url)
         .then((response) => {
                 this.setState({you_can:response.data.activity});
-                let chance = response.data.accessibility * 100
-                this.setState({link:response.data.link})
+                let chance = response.data.accessibility * 100;
+                this.setState({link:response.data.link});
                 this.setState({chances:chance});
+                this.setState({loading:false});
                 if(response.data.error){
                     this.setState({you_can:response.data.error});
                     this.setState({link:""})
                     this.setState({chances:"None 0"});
+                    this.setState({loading:false})
                 }
             },(error) =>{
+                this.setState({loading:false})
                 console.log("sorry for that baby")
             }
         );
@@ -81,7 +99,7 @@ export class ActivityForBoredPeople extends Component{
                     <p>
                     Select the parameters and Generate(more parameters will be added):-
                     </p>
-                        <select class='select-thing'  value={this.state.selectActivity} onChange={this.handleSelectChange} required>
+                        <select className='select-thing'  value={this.state.selectActivity} onChange={this.handleSelectChange} required>
                             {this.createSelectList()}
                         </select>
 
@@ -91,11 +109,11 @@ export class ActivityForBoredPeople extends Component{
                     
                     <button class='Button' type='button' onClick={this.handleCreateActivity}>Create Activity</button>
                 </form>
-
+                {this.loadingScreen()}
                 <p class='activity'><b>You can</b>: {this.state.you_can}</p>
                 <br></br>
-                <p class='activity'><b>Accessibility</b>:</p>
-                <div class="activity_container">
+                <p className='activity'><b>Accessibility</b>:</p>
+                <div className="activity_container">
                    <p>{this.state.chances}%</p>
                 </div>
                 {this.linkIfAny()}
