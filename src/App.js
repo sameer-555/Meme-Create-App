@@ -7,6 +7,11 @@ import { Link, Route } from "react-router-dom";
 function App() {
   return (
     <div>
+    <head>
+      <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+    </head>
+    <body>
+    <div>
     <nav className="navbar navbar-light">
       <ul className="nav navbar-nav">
         <li>
@@ -19,6 +24,8 @@ function App() {
     </nav>
     <Route path="/meme_generator"><MemeGenerator/></Route>
     <Route path="/activity"><ActivityForBoredPeople/></Route>
+  </div>
+  </body>
   </div>
 );
       

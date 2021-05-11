@@ -64,7 +64,7 @@ export class ActivityForBoredPeople extends Component{
                 if(response.data.error){
                     this.setState({you_can:response.data.error});
                     this.setState({link:""})
-                    this.setState({chances:"None -100"});
+                    this.setState({chances:"None 0"});
                 }
             },(error) =>{
                 console.log("sorry for that baby")
