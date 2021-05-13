@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios'
 import { Progress } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import countapi from 'countapi-js';
 
 const activity_type = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
 const participants = [1,2,3,4,5,6,7,8,9,10]
@@ -15,9 +16,13 @@ export class ActivityForBoredPeople extends Component{
             you_can : "?",
             chances: 0,
             link: "",
+            countVisits: null,
             loading:false
         }
-
+        countapi.visits().then((result) => {
+            let res = this.state.countVisits + Number(result.value)
+            this.setState({countVisits:res})
+        });
 
     }
     createSelectList = () =>{
@@ -39,14 +44,21 @@ export class ActivityForBoredPeople extends Component{
     loadingScreen = () =>{
         let loader = [];
         if (this.state.loading){
-            loader.push(<div class="lds-roller" styles={{position: 'absolute'}}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>)
+            loader.push(<div styles={{display:"block",leftalign:"auto",rightalign:"auto"}}><div class="lds-roller" ><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>)
         }
         else{
             loader.pop()
-            console.log("0000",loader)
         }
         return loader
     }
+
+    countVisitsFun = () =>{
+        let countVisit = [];
+        countapi.visits().then((result) => {
+            let res = this.state.countVisits + Number(result.value)
+            this.setState({countVisits:res})
+        });
+      }
 
     progressBar = () =>{
         let progress = [];
@@ -107,8 +119,9 @@ export class ActivityForBoredPeople extends Component{
         return(
             <div>
                 <form>
+                    <p><b>Visits:</b> {this.state.countVisits} </p>
                     <p>
-                    <b>Select the parameters and Generate(more parameters will be added):-</b>
+                    <b>Select the parameters and generate fun activity:-</b>
                     </p>
                         Activity Type<br></br>
                         <select className='select-thing'  value={this.state.selectActivity} onChange={this.handleSelectChange} required>
