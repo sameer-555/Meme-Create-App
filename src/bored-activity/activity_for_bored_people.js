@@ -52,13 +52,6 @@ export class ActivityForBoredPeople extends Component{
         return loader
     }
 
-    countVisitsFun = () =>{
-        let countVisit = [];
-        countapi.visits().then((result) => {
-            let res = this.state.countVisits + Number(result.value)
-            this.setState({countVisits:res})
-        });
-      }
 
     progressBar = () =>{
         let progress = [];
