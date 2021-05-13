@@ -45,15 +45,6 @@
   padding: 0;
 }
 
-/* Container for skill bars */
-.activity_container {
-  width: 100%; /* Full width */
-  text-align: center; /* Right-align text */
-  padding-top: 10px; /* Add top padding */
-  padding-bottom: 10px; 
-  background-color: rgb(6, 190, 0); /* Grey background */
-}
-
 .field_padding {
   padding: 5px 5px 5px 5px;
 }
