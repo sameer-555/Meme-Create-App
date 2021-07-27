@@ -12,15 +12,13 @@ function App() {
     </head>
     <body>
     <div>
-    <nav className="navbar navbar-light">
-      <ul className="nav navbar-nav">
-        <li>
-          <Link to="/meme_generator">Meme Generator</Link>
-        </li>
-        <li>
-          <Link to="/activity">Bored? Here you can find something to do</Link>
-        </li>
-      </ul>
+    <nav class="nav">
+      <div class="item">
+        <Link to="/meme_generator">Meme Generator</Link>
+      </div>
+      <div class="item">
+        <Link to="/activity">Bored? Here you can find something to do</Link>
+      </div>
     </nav>
     <Route path="/meme_generator"><MemeGenerator/></Route>
     <Route path="/activity"><ActivityForBoredPeople/></Route>

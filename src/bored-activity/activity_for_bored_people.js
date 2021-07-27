@@ -110,28 +110,28 @@ export class ActivityForBoredPeople extends Component{
  
     render(){
         return(
-            <div>
-                <form>
-                    <p><b>Visits:</b> {this.state.countVisits} </p>
+            <div class="activity-bored">
+                <form class="activity-form">
+                    <div class='visits'>Visits: {this.state.countVisits}</div>
                     <p>
                     <b>Select the parameters and generate fun activity:-</b>
                     </p>
                         Activity Type<br></br>
-                        <select className='select-thing'  value={this.state.selectActivity} onChange={this.handleSelectChange} required>
+                        <select class="activity-option" value={this.state.selectActivity} onChange={this.handleSelectChange} required>
                             {this.createSelectList()}
                         </select><br></br>
                         Number of Participants<br></br>
-                        <select class='select-thing'  value={this.state.participants} onChange={this.handlePartipantsChange} required>
+                        <select class="activity-option" value={this.state.participants} onChange={this.handlePartipantsChange} required>
                             {this.createParticipantsList()}
                         </select><br></br>
                     
-                    <button class='Button' type='button' onClick={this.handleCreateActivity}>Create Activity</button>
+                    <button class='create-activity' type='button' onClick={this.handleCreateActivity}>Create Activity</button>
                 </form>
                 {this.loadingScreen()}
-                <p class='activity'><b>You can</b>: {this.state.you_can}</p>
+                <p ><b>You can</b>: {this.state.you_can}</p>
                 <br></br>
-                <p className='activity'><b>Accessibility</b>:</p>
-                <div>
+                <p ><b>Accessibility</b>:</p>
+                <div class='progress-bar'>
                     {this.progressBar()}
                 </div>
                 {this.linkIfAny()}
