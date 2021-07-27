@@ -1,13 +1,79 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.nav {
+  background-color: rgb(221, 231, 221);
+  display: flex;
+  justify-content: space-between;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.nav > div {
+  background-color: rgb(221, 231, 221);
+  padding: 1rem;
+  border-radius: 7%;
+  margin: 0.2rem;
+}
+
+.nav > div:hover {
+  background-color: rgb(122, 236, 202);
+  transition: all 0.5s;
+}
+
+#quotes {
+  padding: 0.5rem;
+  background-color: rgb(173, 223, 224);
+  font-style: italic;
+}
+
+.meme-page {
+  text-align: center;
+  background-color: azure;
+}
+
+.activity-bored {
+  text-align: center;
+  background-color: azure;
+}
+
+.meme-form {
+  font-family: "Times New Roman", Times, serif;
+  padding: 0.3rem;
+}
+
+.meme-form > button {
+  background-color: rgb(19, 88, 216);
+  color: azure;
+  margin: 10px;
+  border-radius: 13%;
+}
+
+.meme-page > img {
+  padding: 10px;
+  border-color: blueviolet;
+}
+
+.activity-form {
+  font-family: "Times New Roman", Times, serif;
+  margin: auto;
+}
+
+.activity-bored > p {
+  padding: 20px;
+  margin: auto;
+}
+
+.create-activity {
+  background-color: rgb(19, 88, 216);
+  color: azure;
+  margin: 10px;
+  border-radius: 13%;
+}
+
+.visits {
+  text-align: right;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.activity-option {
+  margin: 12px;
+  width: fit-content;
 }

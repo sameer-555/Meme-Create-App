@@ -1,5 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios'
+import { Progress } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import countapi from 'countapi-js';
 
 const activity_type = ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"]
 const participants = [1,2,3,4,5,6,7,8,9,10]
@@ -13,8 +16,13 @@ export class ActivityForBoredPeople extends Component{
             you_can : "?",
             chances: 0,
             link: "",
+            countVisits: null,
+            loading:false
         }
-
+        countapi.visits().then((result) => {
+            let res = this.state.countVisits + Number(result.value)
+            this.setState({countVisits:res})
+        });
 
     }
     createSelectList = () =>{
@@ -33,6 +41,28 @@ export class ActivityForBoredPeople extends Component{
         return options;
     }
 
+    loadingScreen = () =>{
+        let loader = [];
+        if (this.state.loading){
+            loader.push(<div styles={{display:"block",leftalign:"auto",rightalign:"auto"}}><div class="lds-roller" ><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>)
+        }
+        else{
+            loader.pop()
+        }
+        return loader
+    }
+
+
+    progressBar = () =>{
+        let progress = [];
+        if(this.state.chances){
+            progress.push(<Progress value={this.state.chances}>{this.state.chances}</Progress>)
+        }else{
+            progress.push(<Progress value="0">{this.state.chances}</Progress>)
+        }
+        return progress
+    }
+    
     linkIfAny = () =>{
         let options = [];
         if(this.state.link !== "" && this.state.you_can !== '?'){
@@ -53,20 +83,24 @@ export class ActivityForBoredPeople extends Component{
 
 
     handleCreateActivity =(event) =>{
+        this.setState({loading:true})
         let url = "http://www.boredapi.com/api/activity/"
-        url = url + `?type=${this.state.selectActivity}` + `&participants=${this.state.participants}`
+        url = url + `?type=${this.state.selectActivity}&participants=${this.state.participants}`
         axios.get(url)
         .then((response) => {
                 this.setState({you_can:response.data.activity});
-                let chance = response.data.accessibility * 100
-                this.setState({link:response.data.link})
+                let chance = response.data.accessibility * 100;
+                this.setState({link:response.data.link});
                 this.setState({chances:chance});
+                this.setState({loading:false});
                 if(response.data.error){
                     this.setState({you_can:response.data.error});
                     this.setState({link:""})
-                    this.setState({chances:"None -100"});
+                    this.setState({chances:"None 0"});
+                    this.setState({loading:false})
                 }
             },(error) =>{
+                this.setState({loading:false})
                 console.log("sorry for that baby")
             }
         );
@@ -76,27 +110,29 @@ export class ActivityForBoredPeople extends Component{
  
     render(){
         return(
-            <div>
-                <form>
+            <div class="activity-bored">
+                <form class="activity-form">
+                    <div class='visits'>Visits: {this.state.countVisits}</div>
                     <p>
-                    Select the parameters and Generate(more parameters will be added):-
+                    <b>Select the parameters and generate fun activity:-</b>
                     </p>
-                        <select class='select-thing'  value={this.state.selectActivity} onChange={this.handleSelectChange} required>
+                        Activity Type<br></br>
+                        <select class="activity-option" value={this.state.selectActivity} onChange={this.handleSelectChange} required>
                             {this.createSelectList()}
-                        </select>
-
-                        <select class='select-thing'  value={this.state.participants} onChange={this.handlePartipantsChange} required>
+                        </select><br></br>
+                        Number of Participants<br></br>
+                        <select class="activity-option" value={this.state.participants} onChange={this.handlePartipantsChange} required>
                             {this.createParticipantsList()}
-                        </select>
+                        </select><br></br>
                     
-                    <button class='Button' type='button' onClick={this.handleCreateActivity}>Create Activity</button>
+                    <button class='create-activity' type='button' onClick={this.handleCreateActivity}>Create Activity</button>
                 </form>
-
-                <p class='activity'><b>You can</b>: {this.state.you_can}</p>
+                {this.loadingScreen()}
+                <p ><b>You can</b>: {this.state.you_can}</p>
                 <br></br>
-                <p class='activity'><b>Accessibility</b>:</p>
-                <div class="activity_container">
-                   <p>{this.state.chances}%</p>
+                <p ><b>Accessibility</b>:</p>
+                <div class='progress-bar'>
+                    {this.progressBar()}
                 </div>
                 {this.linkIfAny()}
             </div>
